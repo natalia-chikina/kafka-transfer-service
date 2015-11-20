@@ -24,6 +24,10 @@ object Application extends App  {
       decoder = new StringDecoder()
     ))
 
-    Source(publisher).map(_.message()).to(Sink(EventHubSubscriber(args(4)))).run()
+  def process(message: String) = {
+    message.reverse
+  }
+
+    Source(publisher).map(m => process(m.message())).to(Sink(EventHubSubscriber(args(4)))).run()
 
 }
