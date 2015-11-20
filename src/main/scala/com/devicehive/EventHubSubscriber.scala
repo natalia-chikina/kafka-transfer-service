@@ -4,7 +4,6 @@ import java.util.Hashtable
 import javax.jms.{Session, Destination, ConnectionFactory}
 import javax.naming.{InitialContext, Context}
 
-import org.apache.qpid.jms.JmsConnectionFactory
 import org.reactivestreams.{Subscription, Subscriber}
 
 class EventHubSubscriber(propertyFileName: String) extends Subscriber[String]{
@@ -17,7 +16,6 @@ class EventHubSubscriber(propertyFileName: String) extends Subscriber[String]{
   val context = new InitialContext(env)
 
   val connectionFactory = context.lookup("SBCF").asInstanceOf[ConnectionFactory]
- // val connectionFactory = new JmsConnectionFactory(uri)
 
   val queue = context.lookup("EventHub").asInstanceOf[Destination]
 

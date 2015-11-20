@@ -1,6 +1,5 @@
 package com.devicehive
 
-import java.util.Hashtable
 import javax.jms.{Session, Destination, ConnectionFactory}
 import javax.naming.{InitialContext, Context}
 
@@ -18,13 +17,13 @@ object Application extends App  {
 
     val kafka = new ReactiveKafka()
     val publisher: Publisher[StringKafkaMessage] = kafka.consume(ConsumerProperties(
-      brokerList = args(1),
       zooKeeperHost = args(0),
-      topic = "test",
+      brokerList = args(1),
+      topic = args(2),
       groupId = "groupName",
       decoder = new StringDecoder()
     ))
 
-    Source(publisher).map(_.message()).to(Sink(EventHubSubscriber(args(2)))).run()
+    Source(publisher).map(_.message()).to(Sink(EventHubSubscriber(args(3)))).run()
 
 }
