@@ -38,8 +38,7 @@ class EventHubSubscriber(propertyFileName: String) extends Subscriber[String]{
   }
 
   override def onNext(t: String): Unit = {
-    val message = sendSession.createBytesMessage()
-    message.writeBytes(t.getBytes("UTF-8"))
+    val message = sendSession.createTextMessage(t)
     sender.send(message)
     System.out.println("Sent message")
   }

@@ -20,10 +20,10 @@ object Application extends App  {
       zooKeeperHost = args(0),
       brokerList = args(1),
       topic = args(2),
-      groupId = "groupName",
+      groupId = args(3),
       decoder = new StringDecoder()
     ))
 
-    Source(publisher).map(_.message()).to(Sink(EventHubSubscriber(args(3)))).run()
+    Source(publisher).map(_.message()).to(Sink(EventHubSubscriber(args(4)))).run()
 
 }
