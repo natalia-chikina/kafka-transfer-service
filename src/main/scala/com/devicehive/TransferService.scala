@@ -11,7 +11,7 @@ import kafka.serializer.{StringDecoder, StringEncoder}
 import org.reactivestreams.{Subscription, Publisher, Subscriber}
 import com.softwaremill.react.kafka.{ReactiveKafka, ProducerProperties, ConsumerProperties}
 
-object Application extends App  {
+object TransferService extends App  {
     implicit val actorSystem = ActorSystem("ReactiveKafka")
     implicit val materializer = ActorMaterializer()
 
